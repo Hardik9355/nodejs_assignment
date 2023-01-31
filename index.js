@@ -4,6 +4,13 @@ const connectDB = require("./config/db");
 const app = express();
 console.log(connectDB());
 app.use(express.json({extended : false }));
+const myLogger = function(req,res,next){
+    console.log("Logged in")
+    next()
+    
+}
+app.use(myLogger)
+
 app.get("/", (req,res) => res.send("Server running"));
 app.post("/",(req,res)  => res.send("Server up"));
 const PORT  = process.env.PORT || 5001;
